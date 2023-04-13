@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { myValueSlice, myItem } from './slice';
+import { userFilter, userData, userModal } from './userSlice';
+
 export const store = configureStore({
   reducer: {
-    myValue: myValueSlice.reducer,
-    item: myItem.reducer,
+    filter: userFilter.reducer,
+    data: userData.reducer,
+    modal: userModal.reducer,
   },
 });
-
-export const { increment, decrement } = myValueSlice.actions;
-export const { addTodo } = myItem.actions;

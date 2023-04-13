@@ -1,37 +1,49 @@
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import Filter from './Filter/Filter';
+import Modal from './Modal/Modal';
+import { Button } from '../components/ContactList/ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, addTodo } from '../redux/store';
+import { showModal } from '.././redux/userSlice';
 
-export const App = () => {
-  const value = useSelector(state => state.myValue);
+export default function App() {
+  const modal = useSelector(state => state.modal.showModal);
   const dispatch = useDispatch();
 
+  const togleModal = () => {
+    dispatch(showModal(!modal));
+  };
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      <button onClick={() => dispatch(increment(1))}>Плюс</button>
-      <p>{value}</p>
-      {/* decrement(100) вернет обьект {tepe:decrement payload: 100} */}
-      <button onClick={() => dispatch(decrement(1))}>Минус</button>
-      <button
-        onClick={() => {
-          dispatch(
-            addTodo([
-              { q: 1, f: 2 },
-              { q: 1, f: 2 },
-            ])
-          );
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm />
+      <Button
+        type="button"
+        style={{
+          marginTop: '10px',
         }}
+        onClick={togleModal}
       >
-        Добавить массив
-      </button>
+        Contacts
+      </Button>
+      {modal && (
+        <Modal onClick={togleModal}>
+          <h2
+            style={{
+              textAlign: 'center',
+              paddingBottom: '30px',
+            }}
+          >
+            Contacts
+          </h2>
+          <Filter />
+          <ContactList />
+          <Button type="button" onClick={togleModal}>
+            Close
+          </Button>
+        </Modal>
+      )}
     </div>
   );
-};
+}
