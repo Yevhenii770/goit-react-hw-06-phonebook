@@ -1,21 +1,12 @@
-import { PropTypes } from 'prop-types';
-// import { useEffect } from 'react';
 import { UlOfContact, ContactItem, Button } from './ContactList.styled';
-import { deleteContacts } from '../../redux/userSlice';
+import { deleteContacts, getDataArray } from '../../redux/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const arrayContacts = useSelector(state => state.data);
+  const arrayContacts = useSelector(getDataArray);
+  console.log(arrayContacts);
   const filterValue = useSelector(state => state.filter.filterValue);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem('contacts', JSON.stringify(arrayContacts));
-  // }, [arrayContacts]);
-
-  // const contacts = window.localStorage.getItem('contacts');
-  // const parsed = JSON.parse(contacts);
-  // console.log(contacts);
 
   const filterNormilized = filterValue.toLowerCase().trim();
   const visibleContacts = arrayContacts.filter(contact =>
@@ -37,14 +28,3 @@ const ContactList = () => {
 };
 
 export default ContactList;
-
-ContactList.prototype = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  deleteContact: PropTypes.func,
-};

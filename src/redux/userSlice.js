@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 export const userFilter = createSlice({
   // Имя слайса
   name: 'filter',
@@ -27,7 +30,7 @@ export const userModal = createSlice({
   },
 });
 
-export const userData = createSlice({
+const userData = createSlice({
   name: 'data',
   initialState: [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -37,6 +40,7 @@ export const userData = createSlice({
   ],
   reducers: {
     addData(state, action) {
+      console.log(action);
       state.push(action.payload);
     },
     deleteContacts(state, action) {
@@ -45,7 +49,21 @@ export const userData = createSlice({
   },
 });
 
+const persistConfig = {
+  key: 'contacts',
+  storage,
+  whitelist: ['id'],
+};
+
+export const dataReducer = persistReducer(persistConfig, userData.reducer);
+
 // Генераторы экшенов и редюсеров
 export const { filterQuery } = userFilter.actions;
 export const { showModal } = userModal.actions;
 export const { deleteContacts, addData } = userData.actions;
+
+/////
+// SELECTORS
+////
+
+export const getDataArray = state => state.data;

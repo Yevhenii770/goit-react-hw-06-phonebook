@@ -17,7 +17,7 @@ export function PushNotify(name) {
     gap: 80,
     distance: 20,
     type: 2,
-    position: 'midle',
+    position: 'right top',
   });
 }
 
@@ -37,6 +37,6 @@ export function PushNotifyError(name) {
     gap: 80,
     distance: 20,
     type: 2,
-    position: 'midle',
+    position: 'right top',
   });
 }

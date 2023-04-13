@@ -8,11 +8,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  max-width: 1200px;
+  /* max-width: 1200px;
   min-width: 400px;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 auto; */
 }
 
 code {
@@ -35,4 +35,10 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+div.mainDiv {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
