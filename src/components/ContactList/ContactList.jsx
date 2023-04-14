@@ -6,11 +6,12 @@ const ContactList = () => {
   const dispatch = useDispatch();
   const arrayContacts = useSelector(getDataArray);
   console.log(arrayContacts);
+
   const filterValue = useSelector(state => state.filter.filterValue);
 
   const filterNormilized = filterValue.toLowerCase().trim();
   const visibleContacts = arrayContacts.filter(contact =>
-    contact.name.toLowerCase().includes(filterNormilized)
+    contact.name?.toLowerCase().includes(filterNormilized)
   );
 
   return (

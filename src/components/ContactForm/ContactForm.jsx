@@ -9,7 +9,7 @@ function ContactForm() {
   const numberInputId = nanoid();
 
   const contacts = useSelector(getDataArray);
-  console.log('contacts', contacts);
+
   const dispatch = useDispatch();
 
   const formSubmitHandler = e => {
@@ -21,8 +21,8 @@ function ContactForm() {
       number: e.currentTarget.elements.number.value,
     };
 
-    const checkName = contacts.some(contact =>
-      contact.name?.toLowerCase().includes(newContact.name.toLowerCase())
+    const checkName = contacts.some(elContact =>
+      elContact.name?.toLowerCase().includes(newContact.name.toLowerCase())
     );
 
     if (!checkName) {
